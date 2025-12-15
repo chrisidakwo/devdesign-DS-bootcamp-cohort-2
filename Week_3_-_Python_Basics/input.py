@@ -27,8 +27,8 @@
 # print("")
 
 # Here, we attempt to convert a user input from string to float so that we can
-# perform a math operation on the providd score value.
-score = input("What was your score? ")
-print((float(score) / 100) * 10)
+# perform a math operation on the provide score value.
+# score = input("What was your score? ")
+# print((float(score) / 100) * 10)
 
 
