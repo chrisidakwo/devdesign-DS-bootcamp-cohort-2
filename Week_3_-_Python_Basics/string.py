@@ -141,7 +141,7 @@ print("")
 
 # String Formatting
 print("******** String Formatting ********")
-# F-String
+# F-String: Formatted string
 sentence_f = f"{first_name} {last_name} scored {score} out of 100"
 print(sentence_f)
 
