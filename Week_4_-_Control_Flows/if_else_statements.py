@@ -7,6 +7,7 @@ light = input("What color is the traffic light? ").lower()
 # allowed colors: red, yellow, green
 
 # TODO: Modify colors into a list
+# TODO: Use while loop
 
 # Syntax of an if clause:
 
@@ -14,12 +15,12 @@ light = input("What color is the traffic light? ").lower()
     # 	code that runs of the condition is true
 
 if light == "red" or light == "yellow" or light == "green":
-    if light == "green" or light == "blinking": # if clause
+    if light == "green" or light == "blinking": # if clause (if block)
         print("Go")
     elif light == "yellow": # elif clause
         print("Slow down")
     # elif light == "red": # elif clause
-    else: # else clause
+    else: # else clause (else block)
         print("Stop")
 else:
     print("Valid colors are red, green, and yellow ONLY!")

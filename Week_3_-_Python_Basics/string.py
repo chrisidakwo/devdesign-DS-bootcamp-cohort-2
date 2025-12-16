@@ -53,9 +53,6 @@ print("")
 print("---------------------------------------------")
 print("")
 
-# TODO: Share link. Develop document.
-# https://tinyurl.com/yt2epfan
-
 # Conversions
 print("******** Conversions ********")
 # Int => Float

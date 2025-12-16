@@ -2,15 +2,19 @@
 
 # "and" operator - all sides of the statement must be true, else it resolves to False
 # all conditions must be true
-age = 17
-has_id = True
+age = input("Enter your age: ")
+has_id = input("Do you have an ID? (Enter 'Yes' or 'No') ")
 
-# TODO: Use input to take in data. Validate response for has_id to Yes or No.
+if age.isnumeric() and (has_id.lower() is "yes" or has_id.lower() is "no"):
+    # Validation on the age to ensure it's numeric, and validation on "has_id",
+    # to ensure that it holds either "yes" or "no"
 
-if age >= 18 and has_id == True:
-    print("Give access!")
+    if int(age) >= 18 and has_id == True:
+        print("Give access!")
+    else:
+        print("No access!")
 else:
-    print("No access!")
+    print("Invalid response!")
 
 
 print("")
@@ -20,7 +24,7 @@ print("")
 
 # "or" operator - only one side of the statement must be true for it to resolve as True
 # at least one condition must be true
-if age >= 18 or has_id == True:
+if int(age) >= 18 or has_id == True:
     print("Give access!")
 else:
     print("No access")
