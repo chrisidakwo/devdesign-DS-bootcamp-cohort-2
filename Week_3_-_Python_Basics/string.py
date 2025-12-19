@@ -84,6 +84,7 @@ students = "David,Daniel,Sarah,Lola,Iniye,Irine"
 # Index position by computing
 # -1 less
 greeting = "Hello, good morning"
+
 print(greeting[:])
 # ---> Format: string[start:end:step]
 
