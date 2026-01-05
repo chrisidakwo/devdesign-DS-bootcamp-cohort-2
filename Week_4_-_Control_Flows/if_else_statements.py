@@ -14,7 +14,7 @@ light = input("What color is the traffic light? ").lower()
 # if condition: 
     # 	code that runs of the condition is true
 
-if light == "red" or light == "yellow" or light == "green":
+if light == "red" or light == "yellow" or light == "green" or light == "blinking":
     if light == "green" or light == "blinking": # if clause (if block)
         print("Go")
     elif light == "yellow": # elif clause

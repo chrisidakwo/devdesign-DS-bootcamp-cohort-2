@@ -1,6 +1,6 @@
 # A while loop is a loop that runs based on a condition. The loop does not end, until a set condition resolves to False
 
-# One of the common ways of control the execution of a whole loop is with the use of a flag
+# One of the common ways of control the execution of a whole loop is with the use of a flag/flag variable
 
 count = 1
 

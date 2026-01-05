@@ -1,6 +1,8 @@
 names = ["Mike", "Jane", "Blessing", "Peter", "Joe", "Sarah", "Chris", "Daniel", "Jasper", "Irine"]
 print(len(names))
 
+# traverse through a list
+
 print("Returns the 1st item", names[0])
 print("Returns the 2nd item", names[1])
 print("Returns the 3rd item", names[2])

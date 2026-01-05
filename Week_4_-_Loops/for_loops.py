@@ -10,7 +10,14 @@ name = "Chris Idakwo"
 for char in name:
     print(char)
 
-for x in range(1, 6):
-    print(x)
+print("")
+print("")
+print("=================================================")
+print("Loop through range of numbers")
+print("=================================================")
+print("")
+
+for num in range(1, 6):
+    print(num)
 
 # TODO: Use break and continue statement

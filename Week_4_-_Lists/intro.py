@@ -1,6 +1,8 @@
 # A list is a data type. Just like string, boolean, integer, and float.
 # It is a container that holds multiple value in a single variable. Think of it like:
-#  - A playlist with multiple 
+#  - A playlist with multiple
+
+# Lists are used to hold series of data
 
 # Lists are mutable. Because they can change form by modifying their structure - adding and removing items, sorting the order of items they hold
 

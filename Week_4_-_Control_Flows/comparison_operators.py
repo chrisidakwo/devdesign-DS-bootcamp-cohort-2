@@ -1,7 +1,7 @@
 # Comparison operators are symbols we use in Python to compare two values
 
 # One "equal to" symbol means assignment
-# Doube "equal to" symbol is for comparison
+# Double "equal to" symbol is for comparison
 
 # Equal to (==)
 print("Is 5 equal to 5?", 5 == 5)

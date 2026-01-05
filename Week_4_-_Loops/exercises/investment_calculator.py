@@ -21,6 +21,19 @@ print("")
 
 current_amt = investment_amt
 
+# loop_year = 1
+# while loop_year <= years:
+#     # Calculate the interest earned for the current year
+#     interest_earned = current_amt * (interest_rate / 100)
+
+#     # Calculate the new amount (investment value) using compound interest formula
+#     current_amt = current_amt * (1 + interest_rate / 100)
+
+#     # Display year-by-year growth
+#     print(f"Year {loop_year}: ₦{current_amt:,.2f} | Interest: ₦{interest_earned:,.2f}")
+
+#     loop_year = loop_year + 1
+
 # Use for loop to calculate and display year-by-year growth
 for year in range(1, years + 1):
     # Calculate the interest earned for the current year
@@ -31,7 +44,6 @@ for year in range(1, years + 1):
 
     # Display year-by-year growth
     print(f"Year {year}: ₦{current_amt:,.2f} | Interest: ₦{interest_earned:,.2f}")
-
 
 total_profit = current_amt - investment_amt
 
