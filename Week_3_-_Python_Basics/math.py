@@ -68,3 +68,7 @@ print("")
 print(4 + 6 - 2 / 4)
 print(4 + (6 - 2) / 4)
 
+# Modulus - Returns the remainder of a division operation
+print("******** Modulus ********")
+print(3 % 2)
+print("")
