@@ -15,7 +15,7 @@ print("")
 print("=================================================")
 print("""
     Student Grades Tracker Project
-    Author: Ekojoka Chris Idakwo
+    Author: Chris Idakwo
     Description: A program that tracks student grades, calculates class average, and identifies who passed or failed.
 """)
 print("=================================================")
