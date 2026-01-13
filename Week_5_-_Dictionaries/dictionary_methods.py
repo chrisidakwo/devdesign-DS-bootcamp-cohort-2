@@ -15,8 +15,14 @@ person = {
     "kids": ["Joe", "Martha", "Sarah"]
 }
 
+# middle_name = person.get("middle_name")
+# middle_name = person["middle_name"]
+
 print("First Name (with get() method): ", person.get("first_name"))
 print("First Name (without method): ", person["first_name"])
+
+# Note that when using the get() method, if the key provided does not exist in the dictionary object,
+# a value "None" will be returned. However, when using the square bracket, an error will be thrown
 
 print("")
 print("")
@@ -53,7 +59,7 @@ pprint(person)
 print("")
 print("")
 print("=================================================")
-print("items() - Returns a list containing a tuple of each key-value pair")
+print("items() - Returns a list containing the content of the dictionary where each key-value pair is presented as a tuple")
 print("=================================================")
 print("")
 
