@@ -119,7 +119,7 @@ print(f"\nThe country with the highest active COVID-19 cases is {country} with {
 # Task 2
 #  Calculate the ratio of active cases to population for each country
 
-active_acses_ratio = {}
+active_cases_ratio = {}
 
 for country, data in dataset["countries"].items():
     active_cases = data["active_cases"]
@@ -127,11 +127,11 @@ for country, data in dataset["countries"].items():
 
     country_case_ratio = (active_cases / population) * 100
 
-    active_acses_ratio[country] = round(country_case_ratio, 2)
+    active_cases_ratio[country] = round(country_case_ratio, 2)
 
 
 print("\n***************************** RATIO OF ACTIVE CASES TO POPULATION *****************************")
-pprint(active_acses_ratio)
+pprint(active_cases_ratio)
 
 # Task 3
 #  Find the country with the highest recovery rate (recoveries/total_cases)
