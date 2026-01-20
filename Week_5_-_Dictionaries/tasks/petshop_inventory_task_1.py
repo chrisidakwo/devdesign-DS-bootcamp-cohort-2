@@ -14,9 +14,6 @@ petshop = {
     },
 }
 
-# - animal (dogs, cats, fish, birds)
-# - supplies (foods, toys, habitats)
-
 stock_categories = petshop.keys()
 
 print("")
@@ -31,6 +28,7 @@ print("="*60)
 # Your task is to dynamically update the quantity of a supply item after a sale.
 # Request as much information from the user in order to know what product is to be sold.
 # Print out your inventory after each sale.
+
 category = input(f"\nEnter the category ({", ".join(stock_categories)}): ")
 
 # Validate the category entered by the user. If not valid, display the input again
@@ -69,9 +67,3 @@ print("************** UPDATED INVENTORY **************")
 pprint(petshop[category])
 print("="*60)
 print("")
-
-
-
-
-
-
