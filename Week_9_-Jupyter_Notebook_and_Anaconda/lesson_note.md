@@ -57,7 +57,7 @@ It's perfect for:
 Jupyter notebooks consist of cells, which can be of different types:
 
 - **Code cells**: Contain Python code that can be executed
-- **Markdown cells**: Contain formatted text (headings, lists, links, etc.)
+- **Markdown/Text cells**: Contain formatted text (headings, lists, links, etc.)
 - **Raw cells**: Contain unformatted text that won't be processed
 
 ### Basic Jupyter Operations
