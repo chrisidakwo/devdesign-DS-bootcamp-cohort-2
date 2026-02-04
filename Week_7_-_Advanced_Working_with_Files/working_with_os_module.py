@@ -40,11 +40,14 @@ print("")
 
 # Create directory with try/except block
 # try/catch
+
+# exception
+
 try:
     os.mkdir("Sample Path")
     print("Sample Path directory created!")
 except FileExistsError:
-    print("AN error occurred! Check to ensure the directory doesn't already exist.")
+    print("An error occurred! Check to ensure the directory doesn't already exist.")
 
 
 print("")
