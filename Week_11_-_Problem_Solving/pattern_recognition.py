@@ -94,7 +94,7 @@ for transaction in list(__transactions)[1:]:
 
 # Pattern 5: Transform
 
-# Example Case: Create a list of email addresses for vip customers only (assuming there'a customer category column in the dataset)
+# Example Case: Create a list of email addresses for vip customers only (assuming there's a customer category column in the dataset)
 # Filter + Transform operation
 emails = []
 for transaction in __transactions:

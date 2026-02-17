@@ -382,3 +382,150 @@ for product in products:
 | **GROUP BY** | "By category", "Per customer", "Group by" | Dictionary + `for` | Organize by categories |
 | **FIND MAX/MIN** | "Highest", "Best", "Lowest", "Oldest" | Variable + `for` + comparison | Find extreme value |
 | **TRANSFORM** | "Convert each", "Calculate for each" | List + `for` | Change each item |
+
+---
+
+## **Code Reading Practice**
+
+Most beginners try to write code before they can read code. That's backwards! You need to read fluently before you can write fluently. Today we'll practice reading.
+
+---
+
+### **Exercise 1: Code Explanation**
+
+**Instructions:** "For each code snippet, write in plain English what it does. Don't say 'it loops through' - say what the PURPOSE is."
+
+Give students worksheet with 15 snippets:
+
+```python
+# Snippet 1
+total = 0
+for order in orders:
+    total += order['amount']
+print(total)
+
+# Student writes: "Calculates total of all order amounts"
+```
+
+```python
+# Snippet 2
+high_scorers = []
+for student in students:
+    if student['score'] >= 90:
+        high_scorers.append(student['name'])
+
+# Student writes: "Creates list of students who scored 90 or above"
+```
+
+```python
+# Snippet 3
+product_categories = {}
+for product in products:
+    category = product['category']
+    if category not in product_categories:
+        product_categories[category] = []
+    product_categories[category].append(product)
+
+# Student writes: "Groups products by their category"
+```
+
+```python
+# Snippet 4
+most_expensive = products[0]
+for product in products:
+    if product['price'] > most_expensive['price']:
+        most_expensive = product
+print(most_expensive['name'])
+
+# Student writes: "Finds the most expensive product"
+```
+
+```python
+# Snippet 5
+ages = []
+for person in people:
+    ages.append(person['age'])
+average_age = sum(ages) / len(ages)
+
+# Student writes: "Calculates average age of all people"
+```
+
+```python
+# Snippet 6
+region_totals = {}
+for sale in sales:
+    region = sale['region']
+    if region not in region_totals:
+        region_totals[region] = 0
+    region_totals[region] += sale['amount']
+
+# Student writes: "Calculates total sales amount for each region"
+# Pattern: GROUP BY + AGGREGATE
+```
+
+**Continue with 10 more snippets of varying complexity.**
+
+---
+
+### **Exercise 2: Pattern Identification**
+
+**Instructions:** "For each problem description, identify which pattern you'd use. Don't write code yet!"
+
+**Problems:**
+
+1. "Calculate the average customer spending" → **AGGREGATE**
+2. "List all orders over $500" → **FILTER**
+3. "Group sales by month" → **GROUP BY**
+4. "Find the oldest customer" → **FIND MAX/MIN**
+5. "Convert temperatures from Celsius to Fahrenheit" → **TRANSFORM**
+6. "Count how many products are out of stock" → **AGGREGATE (count)**
+7. "Find customers who made more than 5 purchases" → **FILTER**
+8. "Calculate total revenue by region" → **GROUP BY + AGGREGATE**
+9. "Get the top 3 best-selling products" → **FIND MAX/MIN**
+10. "Create a list of customer emails" → **TRANSFORM**
+11. "Find students who failed (grade < 60)" → **FILTER**
+12. "Group employees by department" → **GROUP BY**
+13. "Find the cheapest item in inventory" → **FIND MAX/MIN**
+14. "Calculate the sum of all invoice amounts" → **AGGREGATE**
+15. "Get product names and prices (from product objects)" → **TRANSFORM**
+
+---
+
+### **Exercise 3: Reverse Engineering**
+
+**Instructions:** "This code solves a problem. What was the problem?"
+
+```python
+# Mystery Code 1
+eligible = []
+for applicant in applicants:
+    if applicant['age'] >= 18 and applicant['has_license']:
+        eligible.append(applicant)
+
+# Answer: "Find all applicants who are 18+ and have a license"
+# Pattern: FILTER (with multiple conditions)
+```
+
+```python
+# Mystery Code 2
+regional_sales = {}
+for sale in sales:
+    region = sale['region']
+    if region not in regional_sales:
+        regional_sales[region] = 0
+    regional_sales[region] += sale['amount']
+
+# Answer: "Calculate total sales by region"
+# Pattern: GROUP BY + AGGREGATE
+```
+
+```python
+# Mystery Code 3
+newest = orders[0]
+for order in orders:
+    if order['date'] > newest['date']:
+        newest = order
+
+# Answer: "Find the most recent order"
+# Pattern: FIND MAX
+```
