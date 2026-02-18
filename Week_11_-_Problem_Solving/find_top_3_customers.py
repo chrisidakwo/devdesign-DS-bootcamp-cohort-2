@@ -6,6 +6,10 @@
 # 6. Implement
 
 # Problem: Find the top 3 customers for the business
+
+def get_total_spent_amt(data):
+    return data[1]
+
 def find_top_3_customers(transactions):
     # Step 1: Group by customer and sum spending
     customer_totals = {}
@@ -21,7 +25,6 @@ def find_top_3_customers(transactions):
         else:
             customer_totals[customer_id] += purchase_amt
 
-
     # Step 2: Convert to list and sort
     # Create a list of (ID, total) tuples
     # Sort by total (in descending order)
@@ -31,12 +34,17 @@ def find_top_3_customers(transactions):
     for (customer_id, total_spent) in customer_totals.items():
         top_customers.append((customer_id, total_spent))
 
-    top_customers.sort(key=lambda x: x[1], reverse=True)
+    top_customers.sort(key=get_total_spent_amt, reverse=True)
     top_customers = top_customers[:3]
 
-    result = ", ".join([f"{cust[0]} - ${cust[1]:.1f}" for cust in top_customers])
+    # A one-line alternative implementation of the preceeding code above
+    # top_customers = sorted(customer_totals.items(), key=get_total_spent_amt, reverse=True)[:3]
 
-    print(result)
+    # return [cust[0] for cust in top_customers]
+
+    result = " | ".join([f"{cust[0]} - ${cust[1]:,.0f}" for cust in top_customers])
+
+    return result
 
 
 def main():
@@ -51,7 +59,8 @@ def main():
             item["Purchase_Amount"] = float(item["Purchase_Amount"])
             transactions.append(item)
 
-        find_top_3_customers(transactions)
+        result = find_top_3_customers(transactions)
+        print(result)
 
 
 main()
