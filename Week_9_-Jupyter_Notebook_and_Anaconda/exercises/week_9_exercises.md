@@ -296,7 +296,7 @@ You'll work with the `customer_transactions.csv` for this exercise
 CUSTOMER DATABASE SUMMARY
 =========================
 Total Customers: 1,523
-Average Transactions per Customer: 4.2
+Average Transactions Count per Customer: 4.2
 Average Customer Lifetime Value: $487.65
 Most Active Customer: CUST-0456 (23 transactions)
 Highest Spending Customer: CUST-0892 ($3,456.78)
