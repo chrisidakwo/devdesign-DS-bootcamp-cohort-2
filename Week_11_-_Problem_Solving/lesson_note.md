@@ -529,3 +529,8 @@ for order in orders:
 # Answer: "Find the most recent order"
 # Pattern: FIND MAX
 ```
+
+---
+
+# 📅 **DAY 2 – Systematic Problem-Solving & Decomposition **
+
