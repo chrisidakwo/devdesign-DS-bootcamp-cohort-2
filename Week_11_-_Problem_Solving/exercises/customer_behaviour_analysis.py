@@ -97,7 +97,7 @@ def main():
     transactions = load_transaction_data("files/customer_transactions.csv")
     customer_profiles = build_customer_profiles(transactions)
     customer_summary = display_customer_summary(customer_profiles)
-
+    
     # TODO: Use the main function to display to the terminal
     # ```txt
     #     CUSTOMER DATABASE SUMMARY
