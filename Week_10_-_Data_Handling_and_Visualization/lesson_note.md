@@ -223,13 +223,13 @@ You've been hired as a data consultant by a school district looking to improve t
 **Tasks**:
 
 1. Enhanced Student Performance Analysis
-   - Load the student_records.csv file
+   - Load the students_record.csv file
    - Calculate each student's average score
    - Assign letter grades (A: ≥90, B: 80-89, C: 70-79, D: 60-69, F: <60)
    - Identify top performers in each subject
    - Analyze if there's a correlation between attendance and performance
    - Create a "Student Report Card" that includes all this information
-   - Save the processed data to a new CSV file named "student_report_cards.csv"
+   - Save the processed data to a new CSV file named "students_report_card.csv"
 
 2. Statistical Distribution Analysis
    - Generate a simulated dataset of 100 test scores (representing a larger school population)
