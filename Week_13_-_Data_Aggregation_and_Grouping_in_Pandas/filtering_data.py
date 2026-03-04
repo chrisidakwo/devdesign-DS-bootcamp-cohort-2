@@ -52,6 +52,7 @@ print("\n")
 
 # 3. filter() method - primarily used to filter rows or columns based on their labels (not content)
 filtered_cols = students_df.filter(like="_score", axis=1)
+# TODO: Filter across rows
 print(filtered_cols)
 
 print("\n")
@@ -67,10 +68,10 @@ print("\n")
 print("="*50)
 print("\n")
 
-# 5 .loc[] Accessor (label-based)
+# 5 .loc[] Accessor (label-based indexing) Label Location
 filtered_df = students_df.loc[students_df["history_score"] > 80, ["student_id", "first_name", "history_score"]]
 print(filtered_df)
 
-# 6 .iloc[] Accessor (label-based)
+# 6 .iloc[] Accessor (Integer-based indexing) Integer location
 filtered_df = students_df.iloc[students_df["history_score"] > 80, [0, 1, 9]]
 print(filtered_df)

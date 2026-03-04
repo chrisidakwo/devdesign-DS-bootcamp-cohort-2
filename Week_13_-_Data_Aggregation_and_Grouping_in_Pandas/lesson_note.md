@@ -93,3 +93,22 @@ girls_ss2 = students_df.loc[(students_df['gender'] == 'F') &
 print("\nGirls in SS2:")
 print(girls_ss2[['first_name', 'last_name']].head())
 ```
+
+## Hands-on Exercise 1: Data Selection Challenge
+
+**Real-world Context:**
+
+As a data scientist working for an educational consulting firm, you've been tasked with identifying students for special academic programs based on specific criteria. This exercise simulates the kind of targeted filtering data scientists perform when creating audience segments or identifying candidates for special interventions.
+
+**Tasks:**
+
+1. Find all students who are in SS1 and have an attendance rate above 92%
+2. Identify students who are excelling in humanities (those with both English Language and Literature in English scores above 85)
+3. Find students who might need academic support (those with at least two STEM subjects below 70)
+4. Create a list of potential math tutors (students with Mathematics scores above 90 in SS3)
+5. Sort the dataset by average score across all subjects they've taken (you'll need to calculate this first)
+
+**Why This Matters**:
+In data analytics, the ability to precisely select subsets of data based on complex criteria is essential. School counselors might use these techniques to identify students for advanced placement courses or academic intervention programs. Marketing analysts use similar approaches to segment customers for targeted campaigns. These filtering operations are among the most commonly used tools in a data scientist's daily workflow.
+
+
