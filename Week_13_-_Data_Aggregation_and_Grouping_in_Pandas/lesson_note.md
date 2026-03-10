@@ -214,3 +214,173 @@ You're working as a data analyst for a school, and the principal has requested a
 
 **Why This Matters**:
 Educational administrators regularly need summary statistics to make data-driven decisions. School leaders might use these analyses to allocate resources for remedial programs, identify successful teaching practices, or spot trends that require intervention. The ability to group and aggregate data is essential for transforming detailed student records into actionable insights that can guide policy decisions.
+
+## Part 3: Data Transformation and Cleaning
+
+### Handling Missing Values
+
+```python
+# Create a dataset with some missing values for demonstration
+data = students_df.copy()
+# Introduce some missing values
+import numpy as np
+np.random.seed(42)  # For reproducibility
+random_indices = np.random.choice(data.index, size=5, replace=False)
+data.loc[random_indices, 'Mathematics'] = np.nan
+
+# Check for missing values
+print("Missing values in each column:")
+print(data.isnull().sum())
+
+# Fill missing values with mean of the column
+data['Mathematics'] = data['Mathematics'].fillna(data['Mathematics'].mean())
+print("\nAfter filling missing values:")
+print(data['Mathematics'].isnull().sum())
+
+# Fill missing values with group means (more sophisticated)
+# For example, fill with the mean for the respective student's class level
+grouped_means = data.groupby('class_level')['Physics'].transform('mean')
+data['Physics'] = data['Physics'].fillna(grouped_means)
+```
+
+### Creating New Columns with .apply() and .transform()
+
+```python
+# First, let's filter to only analyze rows where all core subjects are present
+# (this handles the fact that students take different subjects based on study group)
+core_subjects = ['English Language', 'Mathematics']
+data_with_cores = data.dropna(subset=core_subjects)
+
+# Add a new column with letter grades based on average score of core subjects
+def assign_letter_grade(row):
+    score = (row['English Language'] + row['Mathematics']) / 2
+    if score >= 90:
+        return 'A'
+    elif score >= 80:
+        return 'B'
+    elif score >= 70:
+        return 'C'
+    elif score >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+# Apply function row-wise
+data_with_cores['letter_grade'] = data_with_cores.apply(assign_letter_grade, axis=1)
+print("First few students with letter grades:")
+print(data_with_cores[['first_name', 'last_name', 'letter_grade']].head())
+
+# Using lambda functions for simple transformations
+data_with_cores['is_honor_roll'] = data_with_cores.apply(
+    lambda row: True if assign_letter_grade(row) in ['A', 'B'] else False, axis=1)
+print("\nHonor roll students:")
+print(data_with_cores[data_with_cores['is_honor_roll']][['first_name', 'last_name']].head())
+
+# Create standardized scores (z-scores) for Mathematics
+data_with_cores['math_z_score'] = (data_with_cores['Mathematics'] - data_with_cores['Mathematics'].mean()) / data_with_cores['Mathematics'].std()
+print("\nMath Z-scores:")
+print(data_with_cores[['first_name', 'last_name', 'Mathematics', 'math_z_score']].head())
+```
+
+### Using .transform() for Group-wise Operations
+
+```python
+# Calculate how each student compares to their class level average
+class_avg_math = data_with_cores.groupby('class_level')['Mathematics'].transform('mean')
+data_with_cores['math_vs_class_avg'] = data_with_cores['Mathematics'] - class_avg_math
+print("Math scores compared to class level average:")
+print(data_with_cores[['first_name', 'class_level', 'Mathematics', 'math_vs_class_avg']].head())
+
+# Percentile rank within class level
+def percentile_rank(x):
+    return x.rank(pct=True) * 100
+
+data_with_cores['math_percentile'] = data_with_cores.groupby('class_level')['Mathematics'].transform(percentile_rank)
+print("\nMath percentile within class level:")
+print(data_with_cores[['first_name', 'class_level', 'Mathematics', 'math_percentile']].head())
+```
+
+## Hands-on Exercise 3: Student Report Card Generator
+
+**Real-world Context**:
+As an educational data specialist, you've been asked to create an automated report card system. This system needs to not only display individual student grades but also contextualize each student's performance relative to their peers. This exercise simulates the development of a data pipeline that would feed into a reporting or dashboard system for an educational institution.
+
+**Tasks**:
+
+1. Calculate each student's:
+   - Average score across all subjects they've taken (handle missing values appropriately)
+   - Letter grade based on their average score
+   - Percentile rank within their class level
+   - Performance relative to class level average for each subject
+2. Identify students who:
+   - Are in the top 10% of their class level
+   - Are performing significantly below class level (more than 1 standard deviation below average)
+   - Show high performance variance across subjects (students who excel in some subjects but struggle in others)
+3. Create a summary dataframe that could be used to generate individual student report cards
+4. Save the processed data to a CSV file that could be used by a reporting system
+
+**Why This Matters**:
+This exercise simulates a crucial function that data scientists perform in educational settings: transforming raw assessment data into meaningful feedback for students, parents, and teachers. The skills of data transformation, standardization, and contextualization are not only relevant in education but across many industries. For instance, similar techniques might be used in healthcare to compare patient outcomes against benchmarks, in finance to assess investment performance against market indices, or in marketing to evaluate campaign effectiveness across different segments.
+
+## Key Takeaways
+
+1. **Advanced Selection and Filtering**
+   - Pandas provides powerful tools for selecting specific data points using `.loc[]`, `.iloc[]`, and boolean indexing.
+   - Complex filters can be created by combining conditions with `&` (and), `|` (or).
+   - The `.query()` method offers a more readable way to filter data.
+
+2. **Grouping and Aggregation**
+   - The `.groupby()` method follows the split-apply-combine pattern to analyze data by categories.
+   - Multiple aggregations can be performed simultaneously on different columns.
+   - You can group by multiple columns to create hierarchical summaries.
+
+3. **Data Transformation and Cleaning**
+   - Missing values can be handled strategically using `.fillna()` methods.
+   - The `.apply()` function allows row-wise or column-wise operations with custom functions.
+   - `.transform()` preserves the original DataFrame's index structure, making it ideal for adding new columns based on group calculations.
+
+4. **Practical Applications**
+   - These techniques form the backbone of real-world data analysis workflows.
+   - Properly grouped and aggregated data helps stakeholders make informed decisions.
+   - Data scientists frequently use these methods to transform raw data into actionable insights.
+
+## Take-Home Exercise: School District Performance Analysis
+
+**Real-world Context**:
+You've been hired as a consultant for a large school district that wants to understand patterns in student performance across different schools. They're particularly interested in identifying factors that might influence academic success and finding schools that are performing exceptionally well despite challenges.
+
+**Tasks**:
+
+1. Use the provided district_data.csv file containing data from multiple schools including:
+   - Student demographic information (grade, gender, socioeconomic status)
+   - Academic performance (test scores in multiple subjects)
+   - School information (size, location, resources)
+   - Attendance and participation metrics
+
+2. Perform a comprehensive analysis:
+   - Calculate performance metrics for each school (average scores, passing rates)
+   - Group students by various factors (school, grade level, socioeconomic status, etc.)
+   - Identify the top and bottom performing schools
+   - Investigate whether factors like school size or resources correlate with performance
+   - Find "outlier" schools that perform better than expected given their resources
+  
+3. Create a summary report that includes:
+   - Key performance metrics for each school
+   - Analysis of factors correlated with academic success
+   - Identification of schools that might have best practices to share
+   - Recommendations for schools that might need additional support
+
+4. Support your findings with appropriate data visualizations (this will help prepare you for our next lesson on data visualization)
+
+**Submission**:
+
+- Submit your Python script(s) and any generated CSV files
+- Include a brief report (1-2 pages) summarizing your findings and methodology
+- Be prepared to present a 2-minute summary of your most interesting finding in the next class
+
+## Additional Resources
+
+- [Pandas GroupBy Documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html)
+- [Pandas Data Selection](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html)
+- [Real Python's Pandas GroupBy Tutorial](https://realpython.com/pandas-groupby/)
+- [Towards Data Science: Pandas Apply, Map, and Filter Functions](https://towardsdatascience.com/apply-map-and-filter-functions-to-pandas-dataframes-90f9d5cfe9a)
