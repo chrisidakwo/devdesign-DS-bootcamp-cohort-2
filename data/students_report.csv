@@ -1,0 +1,4 @@
+class_level,num_students,avg_attendance,avg_english,avg_maths,avg_overall,min_overall,max_overall
+SS1,800,88.18,74.26,74.86,73.74,45.7,98.4
+SS2,800,88.09,72.58,73.15,73.17,43.1,94.9
+SS3,800,88.03,74.1,73.79,73.57,37.4,96.6
