@@ -23,24 +23,25 @@ def load_students(filename: str) -> pd.DataFrame:
 
 students_df = load_students("../data/students.csv")
 
-ss1_math = students_df[students_df["class_level"] == "SS1"].iloc[0:50]["Mathematics"]
-ss2_math = students_df[students_df["class_level"] == "SS2"].iloc[0:50]["Mathematics"]
-ss3_math = students_df[students_df["class_level"] == "SS3"].iloc[0:50]["Mathematics"]
-
-# Create a figure and axes
+# Create the figure and axes
 fig, ax = plt.subplots(figsize=(10, 6))
 
-# Create a line representing the distribution of math scores
-ax.plot(range(len(ss1_math)), sorted(ss1_math), label="SS1", color="blue", marker="s")
-ax.plot(range(len(ss2_math)), sorted(ss2_math), label="SS2", color="green", marker="^")
-ax.plot(range(len(ss3_math)), sorted(ss3_math), label="SS3", color="red", marker="o")
+#  Create a scatter plot of Mathematics vs English Lnaguage scores
+ax.scatter(
+    students_df[students_df["class_level"] == "SS1"].iloc[0:100]["Mathematics"],
+    students_df[students_df["class_level"] == "SS1"].iloc[0:100]["English Language"],
+    c=students_df[students_df["class_level"] == "SS1"].iloc[0:100]["attendance"],
+    cmap="viridis" # color palette
+)
 
 # Add labels and title
-ax.set_title("Distribution of Mathematics Scores by Class Level")
-ax.set_ylabel("Mathematics")
-ax.set_xlabel("Student Rank")
-ax.legend()
+ax.set_title("Mathematics vs English Language Scores (colored by attendance)")
+ax.set_xlabel("Mathematics Scores")
+ax.set_ylabel("English Language Scores")
+
+# Add a color bar to show what each color represent
+cbar = plt.colorbar(ax.collections[0], ax=ax)
+cbar.set_label("Attendance Rate (%)")
 
 # Display the plot
 plt.show()
-
