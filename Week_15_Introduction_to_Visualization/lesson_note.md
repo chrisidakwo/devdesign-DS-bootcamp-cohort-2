@@ -285,21 +285,27 @@ Key customization functions:
 - `spines`: Control the border lines of the plot
 - `annotate()`: Add text annotations to specific locations
 
-## Hands-on Exercise 1: Creating Basic Plots
+## Hands-On Exercise 1: Creating Basic Plots with Music Trends Visualization
 
-**Real-world Context**:
-As an educational data analyst for a Nigerian school, you've been asked to create a dashboard showing key performance metrics. The school board wants clear visualizations to understand student performance patterns across different subjects and demographics.
+**Real-world Context:**
+You're working as a data analyst for a music streaming platform. The product team wants a visual breakdown of how audio features and popularity vary across genres and time periods. Your charts will be used in an internal report to help curators understand what makes songs perform well.
 
-**Tasks**:
-1. Create a bar chart showing the average scores for different subjects in each class level (SS1, SS2, SS3)
-2. Plot a histogram of attendance rates, with different colors for male and female students
-3. Create a scatter plot comparing Mathematics and English Language scores, using different colors for study groups
-4. Create a figure with 2 subplots:
-    - One showing the distribution of scores in STEM subjects
-    - One showing the distribution of scores in Arts subjects
+**Tasks:**
 
-**Why This Matters**:
-In real-world data science scenarios, stakeholders often prefer visual representations over raw numbers. A well-designed visualization can instantly convey patterns that might take paragraphs to explain in text. Educational administrators use these visualizations to identify areas needing improvement and to track the effectiveness of interventions.
+1. Create a bar chart showing the **average `danceability`, `energy`, and `valence`** for each genre. Since some songs have multiple genres (e.g. `"hip hop, pop"`), consider using only the **primary genre** (the first one listed) to keep it manageable.
+
+2. Plot a **histogram of song popularity**, using **different colors for explicit vs. non-explicit** songs. The `explicit` column contains `True` or `False` — use that to split your data before plotting.
+
+3. Create a **scatter plot comparing `energy` vs. `danceability`**, using **different colors for each decade** (2000s, 2010s). You can derive the decade from the `year` column. Add a colorbar or legend so the viewer can tell the decades apart.
+
+4. Create a **figure with 2 subplots side by side:**
+   - Left: Distribution of `tempo` for **hip hop songs**
+   - Right: Distribution of `tempo` for **pop songs**
+   
+   Use the primary genre column you created in Task 1 to filter the songs. This lets viewers visually compare whether the two genres differ in rhythm pace.
+
+**Why This Matters:**
+Streaming platforms rely heavily on audio feature data to power recommendation engines and playlist curation. Understanding how features like energy, danceability, and tempo differ across genres and eras helps analysts build better models and give music teams a data-backed picture of what listeners respond to. These are the exact kinds of charts you would present in a real stakeholder report.
 
 ## Part 2: Advanced Visualization with Seaborn
 

@@ -26,7 +26,7 @@ students_df = load_students("../data/students.csv")
 # Create the figure and axes
 fig, ax = plt.subplots(figsize=(10, 6))
 
-#  Create a scatter plot of Mathematics vs English Lnaguage scores
+#  Create a scatter plot of Mathematics vs English Language scores
 ax.scatter(
     students_df[students_df["class_level"] == "SS1"].iloc[0:100]["Mathematics"],
     students_df[students_df["class_level"] == "SS1"].iloc[0:100]["English Language"],
