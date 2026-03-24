@@ -1,3 +1,4 @@
 /.idea
 */__pycache__
-/dsbc2_env
+/
+/data/covid19_compact.csv
