@@ -1,4 +1,4 @@
 /.idea
 */__pycache__
-data/covid19_compact.csv
+/data/covid19_compact.csv
 /dsbc2_env
