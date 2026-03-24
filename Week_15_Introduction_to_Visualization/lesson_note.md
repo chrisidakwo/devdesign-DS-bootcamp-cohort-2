@@ -841,5 +841,3 @@ You're preparing a presentation for the Nigerian Education Committee that examin
 - [Matplotlib Documentation](https://matplotlib.org/stable/contents.html)
 - [Seaborn Documentation](https://seaborn.pydata.org/)
 - [Python Graph Gallery](https://python-graph-gallery.com/) - Examples of various plot types
-- [Data Visualization Catalogue](https://datavizcatalogue.com/) - Guide to choosing the right visualization
-- [Data Visualization Checklist](https://depictdatastudio.com/checklist/) - Best practices for visualization
