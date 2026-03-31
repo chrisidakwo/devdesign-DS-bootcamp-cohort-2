@@ -1,16 +1,16 @@
-**DATA SCIENCE PROJECT BRIEF**  
-**Operation HealthShield**  
-**Nigeria’s COVID-19 Resilience Analysis**  
+**DATA SCIENCE PROJECT BRIEF**
+**Operation HealthShield**
+**Nigeria’s COVID-19 Resilience Analysis**
 **Advising the Federal Ministry of Health**
 
-**Client**  
+**Client**
 Federal Ministry of Health, Federal Republic of Nigeria  
-**Engagement Type**  
+**Engagement Type**
 Data Science Consulting Sprint Project  
-**Dataset**  
+**Dataset**
 OWID COVID-19 Global Dataset (full file ≈160 MB)
-**Classification**  
-Internal / Training Use Only  
+**Classification**
+Internal / Training Use Only
 
 ### 1. Executive Summary
 
