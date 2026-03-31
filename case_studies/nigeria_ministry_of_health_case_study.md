@@ -12,14 +12,14 @@ OWID COVID-19 Global Dataset (full file ≈160 MB)
 **Classification**  
 Internal / Training Use Only  
 
-### 1. Executive Summary  
+### 1. Executive Summary
 
 Nigeria has successfully navigated the worst of the COVID-19 pandemic, but the fight is not over. With a population of over 220 million, the Minister of Health needs clear, data-driven answers before the next Federal Executive Council meeting.
 
 You have been appointed as the **Data Analyst** supporting the Ministry. Using the OWID COVID-19 global dataset, your team must focus exclusively on Nigeria and deliver actionable intelligence on three critical questions the Honourable Minister has personally asked:
 
 1. **What’s happening right now, and how fast is it moving?**  
-2. **Will the health system hold, or will it collapse?**  
+2. **Will the health system hold, or will it collapse?**
 3. **Who needs the vaccine most urgently, and are we reaching them?**
 
 Your analysis will directly inform national policy on vaccination revival, hospital preparedness, and early-warning systems.
@@ -67,7 +67,7 @@ Evaluate hospital and ICU occupancy against Nigeria’s limited bed capacity. As
 **Objective 3: Who needs the vaccine most urgently, and are we reaching them?**  
 Diagnose the vaccination stall, calculate coverage gaps (including one-dose-only population), link to demographic risk factors, and recommend priority groups and practical interventions.
 
-**Supporting Objectives**  
+**Supporting Objectives**
 - Build a clean, reproducible Nigeria-only dataset.  
 - Create compelling visualisations suitable for a Ministerial briefing.  
 - Synthesise findings into clear policy recommendations.
@@ -85,7 +85,7 @@ Diagnose the vaccination stall, calculate coverage gaps (including one-dose-only
 - **D2** Epidemic curve and current situation dashboard.  
 - **D3** Dataset with Resilience Quadrant column + quadrant distribution visuals.  
 - **D4** Healthcare capacity stress-test charts.  
-- **D5** Vaccination gap analysis and priority recommendations.  
+- **D5** Vaccination gap analysis and priority recommendations.
 - **D6** One-page Executive Briefing Memo in plain English for the Minister (addressing the three questions + top 3 insights and recommended actions).
 
 ### 8. What Good Looks Like  
