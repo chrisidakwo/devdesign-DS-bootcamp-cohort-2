@@ -58,13 +58,13 @@ Your task is to classify Nigeria’s data into these quadrants and use them to a
 
 Your analysis must explicitly address the three questions posed by the Honourable Minister:
 
-**Objective 1: What’s happening right now, and how fast is it moving?**  
+**Objective 1: What’s happening right now, and how fast is it moving?**
 Analyse current transmission levels, smoothed case trends, reproduction rate, and recent changes. Determine whether Nigeria is in a truly stable period or a deceptive lull. Identify any early warning signals.
 
-**Objective 2: Will the health system hold, or will it collapse?**  
+**Objective 2: Will the health system hold, or will it collapse?**
 Evaluate hospital and ICU occupancy against Nigeria’s limited bed capacity. Assess how close the system came to collapse during past waves and calculate current buffer capacity.
 
-**Objective 3: Who needs the vaccine most urgently, and are we reaching them?**  
+**Objective 3: Who needs the vaccine most urgently, and are we reaching them?**
 Diagnose the vaccination stall, calculate coverage gaps (including one-dose-only population), link to demographic risk factors, and recommend priority groups and practical interventions.
 
 **Supporting Objectives**
@@ -79,12 +79,12 @@ Diagnose the vaccination stall, calculate coverage gaps (including one-dose-only
 **Phase 3**: Healthcare Stress Test & Vaccination Diagnosis – Directly tackle Objectives 2 and 3.  
 **Phase 4**: Insight Synthesis – Combine everything into a coherent briefing for the Minister.
 
-### 7. Deliverables  
+### 7. Deliverables
 
-- **D1** Clean, commented notebook/script producing the Nigeria dataset.  
-- **D2** Epidemic curve and current situation dashboard.  
+- **D1** Clean, commented notebook/script producing the Nigeria dataset. 
+- **D2** Epidemic curve and current situation dashboard.
 - **D3** Dataset with Resilience Quadrant column + quadrant distribution visuals.  
-- **D4** Healthcare capacity stress-test charts.  
+- **D4** Healthcare capacity stress-test charts.
 - **D5** Vaccination gap analysis and priority recommendations.
 - **D6** One-page Executive Briefing Memo in plain English for the Minister (addressing the three questions + top 3 insights and recommended actions).
 
