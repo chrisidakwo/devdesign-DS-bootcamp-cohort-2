@@ -342,7 +342,7 @@ WHERE Country = 'Brazil' OR Country = 'Germany' OR Country = 'France' OR Country
 ### Pattern Matching with LIKE
 
 The `LIKE` operator lets you search for patterns within text columns. It uses two special wildcard characters:
-- `%` — matches any sequence of characters (zero or more)
+- `%` — a wildcard that matches any sequence of characters (zero or more characters)
 - `_` — matches exactly one character
 
 ```sql
@@ -706,36 +706,16 @@ sqliteonline.com is great for getting started quickly. But as data scientists, w
 - Side-by-side work with Python notebooks and scripts
 - A professional workflow that mirrors real data science environments
 
-### Step 1: Install the SQLite Extensions
+### Step 1: Install the SQLite Extensions and Browse the Database Visually
 
-1. Open VSCode
-2. Go to the Extensions panel by clicking the Extensions icon in the left sidebar (or press `Ctrl+Shift+X` on Windows/Linux, `Cmd+Shift+X` on Mac)
-3. **Install Extension 1:** Search for **"SQLite Viewer"** by Florian Klampfer (publisher: `qwtel`)
-   - This extension lets you click on any `.db` file and browse its tables visually, like a spreadsheet
-   - Click the blue **Install** button
-4. **Install Extension 2:** Search for **"SQLite"** by alexcvzz
-   - This extension lets you run SQL queries directly in VSCode and see results in a table
-   - Click the blue **Install** button
-
-Wait for both extensions to finish installing before proceeding.
-
-### Step 3: Browse the Database Visually
-
+[//]: # TODO(Update the installation step to use DB Browser for SQLite)
 1. In VSCode's file explorer (left sidebar), click on `chinook.db`
 2. The **SQLite Viewer** extension will open it, showing all tables in a visual interface
 3. Click on any table name (e.g., `Customer`) to see its data in a spreadsheet-like view
 4. You can click column headers to sort the data
 5. This is a quick way to inspect what data looks like before writing queries
 
-### Step 4: Open the Database for Querying
-
-1. Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac) to open the **Command Palette**
-2. Type **"SQLite: Open Database"** and select it
-3. Choose `chinook.db` from the list
-4. A new **"SQLITE EXPLORER"** section appears at the bottom of the left sidebar
-5. Expand it to see all tables, and expand any table to see its columns
-
-### Step 5: Write and Run Your First Query in VSCode
+### Step 4: Write and Run Your First Query in VSCode
 
 1. Create a new file: **File → New File**, save it as `day1_practice.sql`
 2. Type this query:
@@ -849,11 +829,6 @@ You've just completed your first day as a data analyst at the Chinook Music Stor
 9. **Challenge:** For each year in the database, calculate the total revenue, total number of invoices, and the average invoice value. Sort by year. Which year had the highest revenue?
 
 10. **Challenge:** Find all customers whose `FirstName` starts with the letter 'A' and who are from a country that has more than 3 customers in total. *(Hint: first figure out which countries have more than 3 customers, then use that information in your WHERE clause with the `IN` operator)*
-
-**Submission:**
-- Save your queries in `day1_homework.sql`
-- Add a comment above each query explaining what it does
-- Be prepared to discuss your answers in the next class
 
 ## Additional Resources
 - [SQL Tutorial — W3Schools](https://www.w3schools.com/sql/) — Quick reference for SQL syntax
