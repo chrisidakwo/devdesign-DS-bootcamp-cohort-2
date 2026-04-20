@@ -343,6 +343,11 @@ The music store's analytics team is preparing a quarterly business review. They 
 
 **Tasks:**
 
+How many albums does each artist have? Show `ArtistId` and the count, sorted by count descending. Limit to the top 10.
+
+How many tracks belong to each genre (`GenreId`)? Only show genres with more than 50 tracks. Sort by track count descending.
+
+
 1. Show all tracks with their genre name (not GenreId). Display the track name and genre name. Limit to 20 results.
 
 2. Show all albums with their artist name, sorted alphabetically by artist name. Limit to 20 results.

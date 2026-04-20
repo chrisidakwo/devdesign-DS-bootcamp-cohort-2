@@ -208,6 +208,21 @@ Every SQL query starts with two essential keywords:
 - **SELECT** — specifies *which columns* you want to see
 - **FROM** — specifies *which table* to get the data from
 
+**Note:** Sample SQL queries for CRUD operations
+```sql
+-- Read from a database table
+SELECT ArtistId, Name FROM Artist LIMIT 10;
+
+-- Update a part of a row in a database table
+UPDATE Artist SET Name = 'AC/DC' WHERE ArtistId = 1;
+
+-- Delete a row from a database table
+DELETE FROM Artist WHERE ArtistId = 1;
+
+-- Create new records in a database table
+INSERT INTO Artist (Name, ArtistId) VALUES ('AC/DC', 1 );
+```
+
 ```sql
 -- See everything in the Artist table
 -- The * means "all columns"
@@ -218,10 +233,10 @@ The `*` (asterisk) is a wildcard that means "give me all columns." While conveni
 
 ```sql
 -- Select specific columns from the Customer table
-SELECT FirstName, LastName, Country FROM Customer;
+SELECT CustomerId, FirstName, LastName FROM Customer;
 ```
 
-This returns only three columns instead of all thirteen columns in the Customer table. This is more efficient and easier to read, especially when tables have many columns.
+This returns only three (3) columns instead of all thirteen (13) columns in the Customer table. This is more efficient and easier to read, especially when tables have many columns.
 
 ```sql
 -- See what genres exist in the store
@@ -527,7 +542,7 @@ SELECT COUNT(*) AS TotalTracks FROM Track;
 
 ```sql
 -- How many tracks have a known composer?
-SELECT COUNT(Composer) AS TracksWithComposer FROM Track;
+SELECT COUNT(Composer) AS TracksWithComposer FROM Track WHERE Composer IS NOT NULL;
 ```
 
 ```sql
@@ -612,6 +627,8 @@ ORDER BY Year;
 
 The `strftime('%Y', InvoiceDate)` function extracts the year from a date column. `strftime` stands for "string format time" and is SQLite's way of working with dates. The `'%Y'` format code means "four-digit year."
 
+[//]: # (Raw Data -> Where &#40;row-level&#41; -> GROUP BY &#40;creates groups&#41; -> HAVING &#40;removes groups&#41;)
+
 ### Filtering Groups with HAVING
 
 `WHERE` filters individual rows *before* grouping. `HAVING` filters *groups after* aggregation. This distinction is important:
@@ -669,7 +686,7 @@ ORDER BY Revenue DESC;
 -- You can use both together
 -- "Look at 2012 invoices only, group by country, then show only countries above $10"
 SELECT BillingCountry, SUM(Total) AS Revenue 
-FROM Invoice 
+FROM Invoice
 WHERE InvoiceDate LIKE '2012%'
 GROUP BY BillingCountry 
 HAVING Revenue > 10
