@@ -12,8 +12,8 @@ By the end of this lesson, you will be able to:
 
 ## Pre-Class Setup
 **What You'll Need:**
-- DB Browser for SQLite installed (from Day 1)
-- The `chinook.sqlite` file in your `sql-bootcamp` project folder
+- DBeaver, MySQL Workbench, or any other MySQL-supported database client
+- The `Chinook_MySql.sql` file in the project folder
 - Python environment with `pandas` and `matplotlib` installed
 
 ---
