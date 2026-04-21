@@ -186,6 +186,8 @@ LIMIT 10;
 
 The `||` operator in SQLite concatenates (joins) text strings together. So `c.FirstName || ' ' || c.LastName` combines the first name, a space, and the last name into a full name.
 
+For MySQL, you use the `CONCAT()` function.
+
 ### The Big Query — Which Artist Generated the Most Revenue?
 
 This question requires a 4-table JOIN chain, because revenue data (in `InvoiceLine`) and artist names (in `Artist`) are separated by several tables:
@@ -230,7 +232,7 @@ ORDER BY Revenue DESC;
 
 ### LEFT JOIN — Including Unmatched Rows
 
-An `INNER JOIN` only returns rows that have a match in both tables. A `LEFT JOIN` returns **all rows from the left table**, even if there's no matching row in the right table. Where there's no match, the right-side columns show `NULL`.
+An `INNER JOIN` only returns rows that have a match in both tables. A `LEFT JOIN` returns **all rows from the table on the left side**, even if there's no matching row in the table on the right side. Where there's no match, the right-side columns show `NULL`.
 
 This is useful for finding what's **missing** — artists without albums, customers who haven't purchased, etc.
 
@@ -342,11 +344,6 @@ This last example is worth noting — you can often solve the same problem with 
 The music store's analytics team is preparing a quarterly business review. They need reports that combine data from multiple tables — customer behavior, artist performance, and sales trends. Yesterday you could only work with one table at a time. Now, with JOINs and subqueries, you can answer the questions that actually matter to the business.
 
 **Tasks:**
-
-How many albums does each artist have? Show `ArtistId` and the count, sorted by count descending. Limit to the top 10.
-
-How many tracks belong to each genre (`GenreId`)? Only show genres with more than 50 tracks. Sort by track count descending.
-
 
 1. Show all tracks with their genre name (not GenreId). Display the track name and genre name. Limit to 20 results.
 
