@@ -4,3 +4,4 @@
 /dsbc2_env
 /data/Chicago_Crimes_2001_to_Present.csv
 .env
+/logs/csv_migration.log
