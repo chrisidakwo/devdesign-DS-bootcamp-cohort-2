@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 conn = connect(
     host="127.0.0.1",
     user="root",
-    password="chrisidakwo",
-    database="chinook"
+    password="<password>",
+    database="<database>"
 )
 
 # Revenue by Country — Horizontal Bar Chart

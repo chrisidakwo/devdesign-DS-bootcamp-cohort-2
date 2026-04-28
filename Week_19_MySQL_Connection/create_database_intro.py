@@ -4,7 +4,7 @@ import pandas as pd
 conn = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
-    password="chrisidakwo"
+    password="<password>"
 )
 
 cursor = conn.cursor()
@@ -14,7 +14,7 @@ cursor.execute("CREATE DATABASE IF NOT EXISTS sample_db")
 cursor.execute("USE sample_db")
 
 # Deletes all the rows in a table and resets the auto-increment memory to 1; for that table.
-# cursor.execute("TRUNACATE TABLE students")
+# cursor.execute("TRUNCATE TABLE students")
 
 # Removes the table from the database
 # cursor.execute("DROP TABLE IF EXISTS students")

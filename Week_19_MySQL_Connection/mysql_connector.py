@@ -4,8 +4,8 @@ import pandas as pd
 conn = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
-    password="chrisidakwo",
-    database="chinook"
+    password="<password>",
+    database="<database>"
 )
 
 df = pd.read_sql("""

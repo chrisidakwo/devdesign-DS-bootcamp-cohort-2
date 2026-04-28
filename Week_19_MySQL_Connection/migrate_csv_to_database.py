@@ -6,7 +6,7 @@ import pandas as pd
 conn = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
-    password="chrisidakwo"
+    password="<password>"
 )
 
 cursor = conn.cursor()
@@ -47,7 +47,7 @@ conn.database = "spotify_top_hits"
 csv_df = pd.read_csv('../data/spotify_top_hits_2000_2009.csv')
 
 # Option 1: Insert data from Pandas dataframe to database using sqlalchemy
-engine = create_engine("mysql+pymysql://root:chrisidakwo@localhost:3306/spotify_top_hits")
+engine = create_engine("mysql+pymysql://root:<password>@localhost:3306/spotify_top_hits")
 
 csv_df.to_sql(
     name="songs",

@@ -2,3 +2,5 @@
 */__pycache__
 /data/covid19_compact.csv
 /dsbc2_env
+/data/Chicago_Crimes_2001_to_Present.csv
+.env

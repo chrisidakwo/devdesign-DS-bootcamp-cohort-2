@@ -1,0 +1,173 @@
+2026-04-28 18:45:34,467 - INFO - .env file loaded!
+2026-04-28 18:47:08,141 - INFO - .env file loaded!
+2026-04-28 18:47:08,141 - ERROR - This is an error
+2026-04-28 18:47:08,141 - WARNING - This is a warning
+2026-04-28 18:47:08,142 - CRITICAL - This is critical!
+2026-04-28 18:55:06,039 - INFO - .env file loaded!
+2026-04-28 18:55:41,311 - INFO - .env file loaded!
+2026-04-28 18:55:41,311 - ERROR - Missing environment variables: ['DB_NAME']. Please check your .file
+2026-04-28 19:01:45,231 - INFO - .env file loaded!
+2026-04-28 19:01:45,232 - CRITICAL - Missing environment variables: ['DB_NAME']. Please check your .env file
+2026-04-28 19:05:25,645 - INFO - .env file loaded!
+2026-04-28 19:05:25,748 - CRITICAL - Database connection failed!
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\base.py", line 3317, in raw_connection
+    return self.pool.connect()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 448, in connect
+    return _ConnectionFairy._checkout(self)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 1272, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 389, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 674, in __init__
+    self.__connect()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 900, in __connect
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\create.py", line 667, in connect
+    return dialect.connect(*cargs_tup, **cparams)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\_auth.py", line 245, in caching_sha2_password_auth
+    pkt = conn._read_packet()
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\connections.py", line 782, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1049, "Unknown database 'crimes_db'")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\crimes_data_migrator.py", line 72, in create_db_engine
+    with engine.connect() as conn:
+         ~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\base.py", line 3293, in connect
+    return self._connection_cls(self)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        err, dialect, engine
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\base.py", line 2448, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\base.py", line 143, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\base.py", line 3317, in raw_connection
+    return self.pool.connect()
+           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 448, in connect
+    return _ConnectionFairy._checkout(self)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 1272, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 712, in checkout
+    rec = pool._do_get()
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\impl.py", line 175, in _do_get
+    return self._create_connection()
+           ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 389, in _create_connection
+    return _ConnectionRecord(self)
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 674, in __init__
+    self.__connect()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 900, in __connect
+    with util.safe_reraise():
+         ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\pool\base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\create.py", line 667, in connect
+    return dialect.connect(*cargs_tup, **cparams)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\sqlalchemy\engine\default.py", line 630, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\connections.py", line 365, in __init__
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\connections.py", line 681, in connect
+    self._request_authentication()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\connections.py", line 980, in _request_authentication
+    auth_packet = _auth.caching_sha2_password_auth(self, auth_packet)
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\_auth.py", line 245, in caching_sha2_password_auth
+    pkt = conn._read_packet()
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\connections.py", line 782, in _read_packet
+    packet.raise_for_error()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Users\ADMIN\Source\Data Science Bootcamp\Cohort 2\dsbc2_env\Lib\site-packages\pymysql\err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1049, "Unknown database 'crimes_db'")
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2026-04-28 19:08:27,234 - INFO - .env file loaded!
+2026-04-28 19:08:27,295 - INFO - Database connection established successfully.
+2026-04-28 19:11:06,979 - INFO - .env file loaded!
+2026-04-28 19:11:07,034 - INFO - Database connection established successfully.
+2026-04-28 19:11:07,034 - INFO - Creating table 'incidents'...
+2026-04-28 19:11:07,109 - INFO - Table 'incidents' created successfully.
+2026-04-28 19:14:43,606 - INFO - .env file loaded!
+2026-04-28 19:14:43,681 - INFO - Database connection established successfully.
+2026-04-28 19:14:43,682 - INFO - Creating table 'incidents'...
+2026-04-28 19:14:43,771 - INFO - Table 'incidents' created successfully.
+2026-04-28 19:43:49,085 - INFO - .env file loaded!
+2026-04-28 19:43:49,152 - INFO - Database connection established successfully.
+2026-04-28 19:43:49,152 - INFO - Creating table 'incidents'...
+2026-04-28 19:43:49,271 - INFO - Table 'incidents' created successfully.
+2026-04-28 19:43:49,272 - INFO - Counting total rows in CSV (this may take a moment)...
+2026-04-28 19:43:54,450 - INFO - Total rows to migrate: 8,422,096
+2026-04-28 19:43:54,450 - INFO - Starting migration in chunks of 10,000 rows...
+2026-04-28 19:43:54,450 - INFO - Estimated batches: 11
+2026-04-28 19:45:06,213 - INFO - Verifying migration...
+2026-04-28 19:45:06,374 - INFO - Migration complete.
+2026-04-28 19:45:06,374 - INFO -   Rows inserted : 100,000
+2026-04-28 19:45:06,374 - INFO -   Rows failed   : 0
