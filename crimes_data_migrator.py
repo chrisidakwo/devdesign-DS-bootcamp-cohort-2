@@ -10,6 +10,9 @@ from sqlalchemy import create_engine, text
 from tqdm import tqdm
 import pandas as pd
 
+import warnings
+warnings.filterwarnings('ignore')
+
 # -------------------------------------
 # CONFIGURATION
 # -------------------------------------
@@ -20,12 +23,15 @@ CSV_FILE_PATH = "data/Chicago_Crimes_2001_to_Present.csv"
 # Number of rows to insert per batch
 # Increase for faster migration on powerful machines
 # Decrease if you run into memory issues
-CHUNK_SIZE = 10_000
+CHUNK_SIZE = 20_000
 
 # Name of the table to create in MySQL
 TABLE_NAME = "incidents"
 
-ROW_LIMIT = 100_000
+# Max rows to migrate per run (set to None for no limit)
+BATCH_LIMIT = 3_000_000
+
+CHECKPOINT_FILE  = "logs/migration_checkpoint.txt"
 
 # -------------------------------------
 # COLUMN RENAMING MAP
@@ -164,28 +170,36 @@ def create_db_engine():
 # TABLE CREATION
 # -------------------------------------
 
-def create_table(engine):
+def create_table(engine, skip_if_exists: bool = False):
     """
     Create the incidents table in MySQL with proper column types.
-    Drops and recreates the table if it already exists, so the
-    script is safe to run more than once.
+
+    Args:
+        engine: SQLAlchemy engine object.
+        skip_if_exists (bool): If True, skip creation if the table already exists.
+                                Used when resuming a checkpointed migration.
     """
-    # Build the column definitions from our COLUMN_DTYPES map
+    if skip_if_exists:
+        logger.info(f"Resuming migration from the last checkpoint. Table '{TABLE_NAME}' already exists.")
+        return
+
     column_definitions = ",\n    ".join(
         f"`{col}` {dtype}" for col, dtype in COLUMN_DTYPES.items()
     )
 
+    # Did not use parameterized query because we had to inject `column_definitions`
+    # which holds the SQL definitions of the columns for the table
     create_table_sql = f"""
-    CREATE TABLE IF NOT EXISTS `{TABLE_NAME}` (
-        {column_definitions},
-        PRIMARY KEY (`id`),
-        INDEX idx_primary_type (`primary_type`),
-        INDEX idx_year (`year`),
-        INDEX idx_district (`district`),
-        INDEX idx_arrest (`arrest`),
-        INDEX idx_domestic (`domestic`),
-        INDEX idx_community_area (`community_area`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        CREATE TABLE IF NOT EXISTS `{TABLE_NAME}` (
+            {column_definitions},
+            PRIMARY KEY (`id`),
+            INDEX idx_primary_type (`primary_type`),
+            INDEX idx_year (`year`),
+            INDEX idx_district (`district`),
+            INDEX idx_arrest (`arrest`),
+            INDEX idx_domestic (`domestic`),
+            INDEX idx_community_area (`community_area`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
     """
 
     with engine.begin() as conn:
@@ -259,16 +273,41 @@ def get_total_rows(filepath: str) -> int:
 
     return total
 
+def get_checkpoint() -> int:
+    """
+    Read the last saved row position from the checkpoint file.
+    Returns 0 if no checkpoint exists (fresh migration).
+    """
+    if os.path.exists(CHECKPOINT_FILE):
+        with open(CHECKPOINT_FILE, "r") as f:
+            value = f.read().strip()
+            if value.isdigit():
+                return int(value)
+    return 0
+
+
+def save_checkpoint(total_rows_migrated: int):
+    """
+    Save the current total rows migrated to the checkpoint file.
+    This is called after every successful chunk insert so that
+    even a mid-run failure only loses at most one chunk.
+
+    Args:
+        total_rows_migrated (int): Total rows successfully inserted across all runs so far.
+    """
+    os.makedirs(os.path.dirname(CHECKPOINT_FILE), exist_ok=True)
+    with open(CHECKPOINT_FILE, "w") as f:
+        f.write(str(total_rows_migrated))
 
 def migrate(engine):
     """
     Read the CSV in chunks and insert into MySQL in batches.
+    Resumes from the last checkpoint if one exists.
 
-    Why chunks?
-    -----------
-    The full dataset is ~2GB with 8.4+ millions of rows.
-    Loading it all into memory at once would crash most machines.
-    Instead, we read and insert CHUNK_SIZE rows at a time.
+    On each run, migrates up to BATCH_LIMIT rows then stops.
+    Run the script again to continue from where it left off.
+    The checkpoint file is updated after every successful chunk
+    so a failure mid-run loses at most one chunk of rows.
     """
     if not os.path.exists(CSV_FILE_PATH):
         raise FileNotFoundError(
@@ -276,39 +315,82 @@ def migrate(engine):
             f"Please place the CSV in the data/raw/ folder."
         )
 
-    total_rows = min(get_total_rows(CSV_FILE_PATH), ROW_LIMIT)
-    total_chunks = (total_rows // CHUNK_SIZE) + 1
-    rows_inserted = 0
-    rows_failed = 0
+    # Read checkpoint - how many rows have already been migrated?
+    rows_already_done = get_checkpoint()
+    is_resuming       = rows_already_done > 0
 
-    logger.info(f"Starting migration in chunks of {CHUNK_SIZE:,} rows...")
-    logger.info(f"Estimated batches: {total_chunks}")
+    if is_resuming:
+        logger.info(f"Resuming from checkpoint: {rows_already_done:,} rows already migrated.")
+        logger.info(f"Skipping first {rows_already_done:,} rows of CSV...")
+    else:
+        logger.info("No checkpoint found - starting fresh migration.")
 
-    # Read the CSV in chunks using pandas
+    # Count remaining rows for progress bar
+    total_csv_rows  = get_total_rows(CSV_FILE_PATH)
+    remaining_rows  = total_csv_rows - rows_already_done
+
+    if remaining_rows <= 0:
+        logger.info("Checkpoint matches total CSV rows - migration already complete.")
+        return 0, 0
+
+    # Apply batch limit
+    rows_to_migrate = remaining_rows
+    if BATCH_LIMIT is not None:
+        rows_to_migrate = min(remaining_rows, BATCH_LIMIT)
+        logger.info(
+            f"Batch limit: {BATCH_LIMIT:,} rows. "
+            f"This run will migrate up to {rows_to_migrate:,} rows."
+        )
+        if remaining_rows > BATCH_LIMIT:
+            logger.info(
+                f"After this run, {remaining_rows - BATCH_LIMIT:,} rows "
+                f"will remain. Run the script again to continue."
+            )
+
+    rows_this_run = 0
+    rows_failed   = 0
+
+    # skiprows skips rows 1..N (preserving the header at row 0)
+    skip = range(1, rows_already_done + 1) if rows_already_done > 0 else None
+
     csv_reader = pd.read_csv(
         CSV_FILE_PATH,
         chunksize=CHUNK_SIZE,
-        nrows=ROW_LIMIT,
+        skiprows=skip,
+        header=0,
         low_memory=False,
     )
 
-    with tqdm(total=total_rows, unit="rows", desc="Migrating") as progress_bar:
+    with tqdm(total=rows_to_migrate, unit="rows", desc="Migrating") as progress_bar:
         for chunk_number, chunk in enumerate(csv_reader, start=1):
+
+            # Stop if we have hit the batch limit for this run
+            if BATCH_LIMIT is not None and rows_this_run >= BATCH_LIMIT:
+                break
+
+            # Trim the last chunk if it would exceed the batch limit
+            if BATCH_LIMIT is not None:
+                remaining_budget = BATCH_LIMIT - rows_this_run
+                if len(chunk) > remaining_budget:
+                    chunk = chunk.iloc[:remaining_budget]
+
             try:
-                # Clean the chunk
                 cleaned_chunk = clean_chunk(chunk)
 
-                # Insert into MySQL
-                # if_exists="append" means: add to existing table, never overwrite
                 cleaned_chunk.to_sql(
                     name=TABLE_NAME,
                     con=engine,
                     if_exists="append",
                     index=False,
-                    method="multi",  # Inserts multiple rows per statement (faster)
+                    method="multi",
                 )
 
-                rows_inserted += len(cleaned_chunk)
+                rows_this_run += len(cleaned_chunk)
+
+                # Save checkpoint after every successful chunk
+                # so a crash only loses at most one chunk
+                save_checkpoint(rows_already_done + rows_this_run)
+
                 progress_bar.update(len(chunk))
 
             except Exception as e:
@@ -320,7 +402,7 @@ def migrate(engine):
                 progress_bar.update(len(chunk))
                 continue
 
-    return rows_inserted, rows_failed
+    return rows_this_run, rows_failed
 
 # -------------------------------------
 # VERIFICATION
@@ -402,7 +484,11 @@ def main():
     engine = create_db_engine()
 
     # Step 3: Create the table with proper schema
-    create_table(engine)
+    # Only create (and drop+recreate) the table on a fresh run.
+    # If a checkpoint exists, the table is already populated -
+    # skip creation and append to what is already there.
+    rows_already_done = get_checkpoint()
+    create_table(engine, skip_if_exists=(rows_already_done > 0))
 
     # Step 4: Run the migration
     (rows_inserted, rows_failed) = migrate(engine)
@@ -411,14 +497,30 @@ def main():
     verify_migration(engine)
 
     # Step 6: Final summary
-    logger.info(f"Migration complete.")
-    logger.info(f"  Rows inserted : {rows_inserted:,}")
-    logger.info(f"  Rows failed   : {rows_failed:,}")
+    logger.info(f"Run complete.")
+    logger.info(f"  Rows inserted          : {rows_inserted:,}")
+    logger.info(f"  Rows failed            : {rows_failed:,}")
+    logger.info(f"  Total rows in DB       : {rows_already_done + rows_inserted:,}")
+
+    # Step 7: Check if migration is fully complete
+    total_csv_rows = get_total_rows(CSV_FILE_PATH)
+    total_migrated = rows_already_done + rows_inserted
+    if total_migrated >= total_csv_rows:
+        logger.info("Migration fully complete. All rows migrated.")
+        # Optionally delete the checkpoint file
+        if os.path.exists(CHECKPOINT_FILE):
+            os.remove(CHECKPOINT_FILE)
+            logger.info("Checkpoint file removed.")
+    else:
+        remaining = total_csv_rows - total_migrated
+        logger.info(
+            f"-> {remaining:,} rows remaining. "
+            f"Run the script again to continue."
+        )
 
     if rows_failed > 0:
         logger.warning(
-            f"{rows_failed:,} rows failed to insert. "
-            f"Check logs/migration.log for details."
+            f"{rows_failed:,} rows failed to insert. Check logs/migration.log for details."
         )
 
 if __name__ == "__main__":
